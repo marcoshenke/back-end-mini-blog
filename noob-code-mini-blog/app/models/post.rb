@@ -1,5 +1,9 @@
 class Post < ApplicationRecord
+  include PostQuery
+
   validates :title, :description, presence: true
-  validates :title, lenght: { minimum: 5 }
-  validates :description, lenght: { minimum: 15 }
+  validates :title, length: { minimum: 5 }
+  validates :description, length: { minimum: 15 }
+
+  has_many :comments, dependent: :delete_all
 end
