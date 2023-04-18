@@ -2,9 +2,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Posts::List.new(params).execute
+    posts = Posts::List.new(params).execute
 
-    render json: @posts, each_serializer: PostSerializer, status: :ok
+    render json: posts, meta: pagination(posts), each_serializer: PostSerializer, status: :ok
   end
 
   def show
