@@ -1,22 +1,16 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show update destroy ]
 
   # GET /categories
   def index
     @categories = Category.all
+
+    render json: @categories
   end
 
   # GET /categories/1
   def show
-  end
-
-  # GET /categories/new
-  def new
-    @category = Category.new
-  end
-
-  # GET /categories/1/edit
-  def edit
+    render json: @category
   end
 
   # POST /categories
@@ -24,7 +18,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to @category, notice: "Category was successfully created."
+      render json: @category, notice: "Category was successfully created."
     else
       render :new, status: :unprocessable_entity
     end

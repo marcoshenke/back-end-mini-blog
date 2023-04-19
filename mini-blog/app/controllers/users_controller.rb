@@ -1,22 +1,15 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users
   def index
     @users = User.all
+    render json: @users
   end
 
   # GET /users/1
   def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
+    render json: @user
   end
 
   # POST /users
@@ -24,7 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: "User was successfully created."
+      render json: @user, notice: "User was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +26,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "User was successfully updated."
+     render json: @user, notice: "User was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

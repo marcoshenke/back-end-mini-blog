@@ -2,6 +2,8 @@ pt-BR:
   models:
     "Post": "Postagem "
     "Comment": "Comentário "
+    "Category": "Categoria "
+    "User": "Usuário "
   time:
     formats:
       default: ! "%a, %d de %B de %Y, %H:%M:%S %z"
