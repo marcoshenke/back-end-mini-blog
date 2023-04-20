@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :kind_users
   resources :categories
   resources :posts
+  resources :users
 
   resources :comments, only: [:create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
