@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+        include DeviseTokenAuth::Concerns::SetUserByToken
   include ErrorsHandler::Handler
   include ActionController::MimeResponds
   include ActionController::Serialization

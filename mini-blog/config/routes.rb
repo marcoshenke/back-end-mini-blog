@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :kind_users
+  mount_devise_token_auth_for 'User', at: 'auth'
   resources :categories
-  resources :users
   resources :posts
 
   resources :comments, only: [:create]

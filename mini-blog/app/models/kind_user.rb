@@ -1,0 +1,2 @@
+class KindUser < ApplicationRecord
+end
