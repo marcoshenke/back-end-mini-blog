@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :kind_users
   mount_devise_token_auth_for 'User', at: 'auth'
+  resources :kind_users
   resources :categories
   resources :posts
 
