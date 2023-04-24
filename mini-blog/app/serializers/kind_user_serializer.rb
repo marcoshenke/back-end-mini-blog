@@ -1,3 +1,3 @@
 class KindUserSerializer < ActiveModel::Serializer
-  attributes :id, :kind
+  attributes :kind
 end

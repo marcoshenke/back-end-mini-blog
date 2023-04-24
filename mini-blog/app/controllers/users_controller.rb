@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_user, only: %i[show]
 
   # GET /users
   def index
     users = Users::List.new(params).execute
 
-    render json: posts, meta: pagination(users), each_serializer: PostSerializer, status: :ok
+    render json: users, meta: pagination(users), each_serializer: UserSerializer, status: :ok
   end
 
   # GET /users/1

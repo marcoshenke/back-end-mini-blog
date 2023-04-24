@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   def pagination(object)
     {
       current_page: object.current_page,
-      per_page: object.per_page(params),
+      per_page: object.per_page,
       total_pages: object.total_pages,
       total_count: object.total_count
     }

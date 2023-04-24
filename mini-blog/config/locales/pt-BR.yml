@@ -4,6 +4,7 @@ pt-BR:
     "Comment": "Comentário "
     "Category": "Categoria "
     "User": "Usuário "
+    "KindUser": "Tipo de usuário "
   time:
     formats:
       default: ! "%a, %d de %B de %Y, %H:%M:%S %z"

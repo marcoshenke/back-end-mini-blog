@@ -1,4 +1,4 @@
-class Users::List
+class KindUsers::List
   attr_accessor :params
 
   def initialize(params)
@@ -6,6 +6,6 @@ class Users::List
   end
 
   def execute
-    User.__search(params)
+    KindUser.__search(params)
   end
 end

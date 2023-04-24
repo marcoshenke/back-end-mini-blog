@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    attributes:
+      kind_user:
+        id: "Identificador de tipo de usuário"
+        kind: "tipo"

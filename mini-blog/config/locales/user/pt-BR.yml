@@ -1,0 +1,7 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        username: "Nome de usuário"
+        kind_user_id: "Identidade de tipo de usuário"

@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   validates :description, length: { minimum: 15 }
 
   has_many :comments, dependent: :delete_all
+  has_one :category
+  belongs_to :user
 end
