@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name username])
+    devise_parameter_sanitizer.permit(:sing_in, keys: %i[password email])
   end
 
   def pagination(object)
