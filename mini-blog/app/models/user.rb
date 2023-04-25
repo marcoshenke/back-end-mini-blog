@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include UserQuery
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and:omniauthable
   #  :trackable
