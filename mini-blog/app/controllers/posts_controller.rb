@@ -4,8 +4,8 @@ class PostsController < ApplicationController
 
   def index
     posts = Posts::List.new(params).execute
-    # , meta: pagination(posts),
-    render json: posts, each_serializer: PostSerializer, status: :ok
+
+    render json: posts, meta: pagination(posts), each_serializer: PostSerializer, status: :ok
   end
 
   def show

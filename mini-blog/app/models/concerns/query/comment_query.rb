@@ -1,4 +1,4 @@
-module UserQuery
+module CommentQuery
   extend ActiveSupport::Concern
   include BaseQuery
 
@@ -11,8 +11,9 @@ module UserQuery
       return {} unless params
 
       {
-        name_cont: params[:name],
-        username_cont: params[:username]
+        comment_cont: params[:id],
+        post_id_eq: params[:title],
+        user_id_eq: params[:description]
       }
     end
 
