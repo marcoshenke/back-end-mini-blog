@@ -4,8 +4,8 @@ class PostsController < ApplicationController
 
   def index
     posts = Posts::List.new(params).execute
-
-    render json: posts, meta: pagination(posts), each_serializer: PostSerializer, status: :ok
+    # , meta: pagination(posts),
+    render json: posts, each_serializer: PostSerializer, status: :ok
   end
 
   def show
@@ -39,6 +39,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:title, :description, :category_id, :user_idx)
   end
 end
