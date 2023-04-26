@@ -36,5 +36,6 @@ module NoobCodeMiniBlog
                  methods: %i[get post options delete put]
       end
     end
+    config.action_dispatch.rescue_responses['Pundit::NotAuthorizedError'] = :forbidden
   end
 end
