@@ -17,6 +17,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   def create
     @category = Category.new(category_params)
+    authorize @category
 
     if @category.save
       render json: @category, notice: 'Category was successfully created.'

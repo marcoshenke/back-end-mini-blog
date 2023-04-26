@@ -2,23 +2,6 @@ class KindUsersController < ApplicationController
   before_action :set_kind_user, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
 
-  # GET /kind_users
-  def index
-    @kind_users = KindUser.all
-    render json: @kind_users
-  end
-
-  # GET /kind_users/1
-  def show; end
-
-  # GET /kind_users/new
-  def new
-    @kind_user = KindUser.new
-  end
-
-  # GET /kind_users/1/edit
-  def edit; end
-
   # POST /kind_users
   def create
     @kind_user = KindUser.new(kind_user_params)
