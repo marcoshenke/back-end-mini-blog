@@ -6,11 +6,11 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def create?
-    user.kind == 2
+    user&.kind == 2
   end
 
   def update?
-    user.kind == 2
+    user&.kind == 2
   end
 
   def destroy?

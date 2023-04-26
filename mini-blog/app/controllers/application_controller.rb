@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
+
   private
 
   def user_not_authorized
