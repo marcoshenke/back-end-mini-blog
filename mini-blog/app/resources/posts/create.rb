@@ -14,7 +14,9 @@ class Posts::Create
   def mount_params
     {
       title: params[:title],
-      description: params[:description]
+      description: params[:description],
+      category_id: params[:category_id],
+      user_id: params[:user_id]
     }
   end
 end

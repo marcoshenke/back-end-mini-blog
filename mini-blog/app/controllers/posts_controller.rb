@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Posts::Create.new(post_params).execute
+    @post = authorize Posts::Create.new(post_params).execute
 
     render json: @post, serializer: PostSerializer, status: :created
   end
@@ -25,8 +25,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.delete!
-
+    @post = Posts::Delete.new.execute
+    authorize @post
     head :no_content
   end
 
@@ -40,6 +40,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :description, :category_id, :user_idx)
+    params.require(:post).permit(:title, :description, :category_id, :user_id)
   end
 end

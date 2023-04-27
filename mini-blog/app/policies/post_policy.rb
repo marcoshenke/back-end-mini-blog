@@ -1,19 +1,24 @@
 class PostPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
+  attr_reader :user, :post
+
+  def initialize(user, post)
+    @user = user
+    @post = post
   end
 
   def show?
     true
   end
 
+  def create?
+    user.admin?
+  end
+
   def update?
-    user.id == record.user.id
+    user.admin?
   end
 
   def destroy?
-    user.id == record.user.id
+    user.admin?
   end
 end
