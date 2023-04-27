@@ -19,13 +19,13 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.update!(post_params)
+    @post = Posts::Update.new(post_params).execute
 
     render json: @post, serializer: PostSerializer, status: :ok
   end
 
   def destroy
-    @post.destroy!
+    @post.delete!
 
     head :no_content
   end
