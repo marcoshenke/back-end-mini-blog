@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all
+    @categories = Categories::List.new.execute
 
     render json: @categories
   end
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = Category.new(category_params)
+    @category = Categories::Create.new(category_params).execute
     authorize @category
 
     if @category.save
@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1
   def update
-    if @category.update(category_params)
+    if @category = Categories::Update.new(category_params).execute
       redirect_to @category, notice: 'Category was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
