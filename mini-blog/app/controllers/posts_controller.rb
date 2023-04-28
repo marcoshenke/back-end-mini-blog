@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   def index
     posts = Posts::List.new(params).execute
@@ -19,8 +19,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Posts::Update.new(post_params).execute
-
+    authorize Posts::Update.new(post_params, @post).execute
     render json: @post, serializer: PostSerializer, status: :ok
   end
 

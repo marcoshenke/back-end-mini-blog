@@ -1,24 +1,25 @@
 class PostPolicy < ApplicationPolicy
-  attr_reader :user, :post
-
-  def initialize(user, post)
-    @user = user
-    @post = post
+  def new?
+    user_is_owner_of_record?
   end
 
   def show?
-    true
+    user_is_owner_of_record? || @record.published
   end
 
   def create?
-    user.admin? || user.id == post.user_id
+    user.admin? || user_is_owner_of_record?
   end
 
   def update?
-    user.admin? || user.id == post.user_id
+    user.admin? || user_is_owner_of_record?
   end
 
   def destroy?
-    user.admin? || user.id == post.user_id
+    user.admin? || user_is_owner_of_record?
+  end
+
+  def user_is_owner_of_record?
+    @user == @record.user
   end
 end

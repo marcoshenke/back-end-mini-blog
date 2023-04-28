@@ -19,7 +19,7 @@ class Comments::Create
   def mount_params
     {
       comment: params[:comment],
-      post_id: post_id
+      post_id: params[post_id]
     }
   end
 end
