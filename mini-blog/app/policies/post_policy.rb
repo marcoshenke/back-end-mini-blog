@@ -11,14 +11,14 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user.kind_user_id == 2 || user.id == record.user.id
+    user.admin? || user.id == post.user_id
   end
 
   def update?
-    user.kind_user_id == 2 || user.id == record.user.id
+    user.admin? || user.id == post.user_id
   end
 
   def destroy?
-    user.kind_user_id == 2 || user.id == record.user.id
+    user.admin? || user.id == post.user_id
   end
 end

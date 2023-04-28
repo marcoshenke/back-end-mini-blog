@@ -13,8 +13,7 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   has_many :posts, dependent: :destroy
-  has_one :category
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   private
 

@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   validates :title, :description, :category_id, presence: true
   validates :title, length: { minimum: 5 }
-  validates :description, length: { minimum: 2 }
+  validates :description, length: { minimum: 10 }
 
   has_many :comments, dependent: :delete_all
   belongs_to :category

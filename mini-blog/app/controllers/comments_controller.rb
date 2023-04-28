@@ -3,13 +3,13 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comments::Create.new(comment_params).execute
-
+    authorize @comment
     render json: @comment, serializer: CommentSerializer, status: :created
   end
 
   def update
     @comment = Comments::Update.new(comment_params).execute
-    render json: @comment, serializer: CommentSerializer, status: :created
+    render json: @comment, serializer: CommentSerializer, status: :updated_at
   end
 
   private
