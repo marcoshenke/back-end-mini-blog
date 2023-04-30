@@ -1,5 +1,5 @@
-class Posts::Delete
+class Posts::Destroy
   def execute
-    Post.delete!
+    post.destroy!
   end
 end

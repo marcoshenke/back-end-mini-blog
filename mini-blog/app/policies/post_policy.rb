@@ -3,20 +3,24 @@ class PostPolicy < ApplicationPolicy
     user_is_owner_of_record?
   end
 
+  def index?
+    true
+  end
+
   def show?
-    user_is_owner_of_record? || @record.published
+    true
   end
 
   def create?
-    user.admin? || user_is_owner_of_record?
+    user.present? && (user.admin? || user_is_owner_of_record?)
   end
 
   def update?
-    user.admin? || user_is_owner_of_record?
+    user.present? && (user.admin? || user_is_owner_of_record?)
   end
 
   def destroy?
-    user.admin? || user_is_owner_of_record?
+    user.present? && (user.admin? || user_is_owner_of_record?)
   end
 
   def user_is_owner_of_record?

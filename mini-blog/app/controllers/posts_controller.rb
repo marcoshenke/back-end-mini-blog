@@ -19,14 +19,20 @@ class PostsController < ApplicationController
   end
 
   def update
-    authorize Posts::Update.new(post_params, @post).execute
+    authorize @post
+    Posts::Update.new(post_params, @post).execute
     render json: @post, serializer: PostSerializer, status: :ok
   end
 
   def destroy
-    @post = Posts::Delete.new.execute
+    # authorize @post.destroy!
+    # authorize @post
+    # Posts::Destroy.new(@post).execute
+    # head :no_content
+    @post = Post.find(params[:id])
     authorize @post
-    head :no_content
+    @post.destroy
+    redirect_to posts_path, notice: 'Post excluído com sucesso.'
   end
 
   private

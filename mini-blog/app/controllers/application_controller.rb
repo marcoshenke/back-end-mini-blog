@@ -11,11 +11,14 @@ class ApplicationController < ActionController::Base
 
   after_action :verify_authorized, except: :index, unless: :devise_controller?
 
-  rescue_from Pundit::NotAuthorizedError do
-    redirect_to root_url, alert: 'You do not have acess to this page'
-  end
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+  def user_not_authorized
+    flash[:alert] = 'You are not authorized to perform this action.'
+    redirect_back(fallback_location: root_path)
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: %i[name username])
