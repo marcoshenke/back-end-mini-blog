@@ -11,9 +11,9 @@ module CommentQuery
       return {} unless params
 
       {
-        comment_cont: params[:id],
-        post_id_eq: params[:title],
-        user_id_eq: params[:description]
+        comment_cont: params[:comment],
+        post_id_eq: params[:post_id],
+        user_id_eq: params[:user_id]
       }
     end
 

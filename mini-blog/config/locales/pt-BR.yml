@@ -1,10 +1,9 @@
 pt-BR:
   models:
-    "Post": "Postagem "
-    "Comment": "Comentário "
-    "Category": "Categoria "
-    "User": "Usuário "
-    "KindUser": "Tipo de usuário "
+    "post": "Postagem"
+    "comment": "Comentário"
+    "category": "Categoria"
+    "user": "Usuário"
   time:
     formats:
       default: ! "%a, %d de %B de %Y, %H:%M:%S %z"

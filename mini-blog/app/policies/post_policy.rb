@@ -12,15 +12,15 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && (user.admin? || user_is_owner_of_record?)
+    user.present? && (user&.admin || user_is_owner_of_record?)
   end
 
   def update?
-    user.present? && (user.admin? || user_is_owner_of_record?)
+    user.present? && (user&.admin || user_is_owner_of_record?)
   end
 
   def destroy?
-    user.present? && (user.admin? || user_is_owner_of_record?)
+    user.present? && (user&.admin || user_is_owner_of_record?)
   end
 
   def user_is_owner_of_record?

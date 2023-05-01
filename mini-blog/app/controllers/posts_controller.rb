@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
   def index
     posts = Posts::List.new(params).execute
-
     render json: posts, meta: pagination(posts), each_serializer: PostSerializer, status: :ok
   end
 
@@ -25,14 +24,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    # authorize @post.destroy!
-    # authorize @post
-    # Posts::Destroy.new(@post).execute
-    # head :no_content
-    @post = Post.find(params[:id])
-    authorize @post
-    @post.destroy
-    redirect_to posts_path, notice: 'Post excluído com sucesso.'
+    authorize Posts::Destroy.new(@post).execute
+    head :ok
   end
 
   private

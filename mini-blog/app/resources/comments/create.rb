@@ -1,9 +1,9 @@
 class Comments::Create
-  attr_accessor :params, :post_id
+  attr_accessor :params, :post
 
   def initialize(params)
     @params = params
-    @post_id = find_post!
+    @post = find_post!
   end
 
   def execute
@@ -19,7 +19,7 @@ class Comments::Create
   def mount_params
     {
       comment: params[:comment],
-      post_id: params[post_id]
+      post_id: params[post]
     }
   end
 end

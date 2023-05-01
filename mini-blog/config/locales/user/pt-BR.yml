@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
-    attributes:
+    models:
       user:
-        name: "Nome"
-        username: "Nome de usuário"
-        kind_user_id: "Identidade de tipo de usuário"
+        attributes:
+          id: "Identificador de usuário"
+          name: "Nome"
+          username: "Nome de usuário"
+          admin: "É administrador?"
