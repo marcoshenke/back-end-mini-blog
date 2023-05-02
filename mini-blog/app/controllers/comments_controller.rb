@@ -9,12 +9,13 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comments::Update.new(comment_params).execute
-    render json: @comment, serializer: CommentSerializer, status: :updated_at
+    authorize @comment
+    Comments::Update.new(comment_params, @comment).execute
+    render json: @comment, serializer: CommentSerializer, status: :accepted
   end
 
   def destroy
-    authorize Comment::Destroy.new(@comment).execute
+    authorize Comments::Destroy.new(@comment).execute
     head :ok
   end
 

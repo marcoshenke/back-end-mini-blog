@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Categories::List.new.execute
+    @categories = Categories::List.new(params).execute
 
     render json: @categories
   end
@@ -16,11 +16,11 @@ class CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = Categories::Create.new(category_params).execute
-    authorize @category
+    authorize @category = Categories::Create.new(category_params).execute
 
     if @category.save
-      render json: @category, notice: 'Category was successfully created.'
+      render json: @category, serializer: CategorySerializer, status: :created,
+             notice: 'Category was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
