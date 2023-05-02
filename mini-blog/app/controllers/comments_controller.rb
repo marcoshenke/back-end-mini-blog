@@ -3,9 +3,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    binding.pry
-
-    @comment = authorize Comments::Create.new(comment_params).execute
+    @comment = authorize Comments::Create.new(comment_params, current_user).execute
 
     render json: @comment, serializer: CommentSerializer, status: :created
   end
