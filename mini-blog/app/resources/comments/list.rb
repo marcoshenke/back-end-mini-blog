@@ -6,6 +6,6 @@ class Comments::List
   end
 
   def execute
-    Post.__search(params)
+    Comment.__search(params)
   end
 end

@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[update destroy]
-  before_action :authenticate_user!
+  before_action :set_comment, only: %i[show update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+
+  def index
+    comments = Comments::List.new(params).execute
+    render json: comments, meta: pagination(comments), each_serializer: CommentSerializer, status: :ok
+  end
 
   def create
     @comment = authorize Comments::Create.new(comment_params, current_user).execute
