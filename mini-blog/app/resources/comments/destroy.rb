@@ -1,5 +1,11 @@
-class Comments::Delete
+class Comments::Destroy
+  attr_accessor :comment
+
+  def initialize(comment)
+    @comment = comment
+  end
+
   def execute
-    Comment.delete!
+    comment.destroy!
   end
 end

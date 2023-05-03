@@ -4,23 +4,22 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Categories::List.new.execute
-
-    render json: @categories
+    @categories = Categories::List.new(params).execute
+    render json: @categories, status: :ok
   end
 
   # GET /categories/1
   def show
-    render json: @category
+    authorize @category
+    render json: @category, serializer: CategorySerializer, list_posts: true
   end
 
   # POST /categories
   def create
-    @category = Categories::Create.new(category_params).execute
-    authorize @category
+    authorize @category = Categories::Create.new(category_params).execute
 
     if @category.save
-      render json: @category, notice: 'Category was successfully created.'
+      render json: @category, serializer: CategorySerializer, status: :created
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,17 +27,15 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1
   def update
-    if @category = Categories::Update.new(category_params).execute
-      redirect_to @category, notice: 'Category was successfully updated.'
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    authorize @category
+    Categories::Update.new(category_params, @category).execute
+    render json: @category, serializer: CategorySerializer, status: :accepted
   end
 
   # DELETE /categories/1
   def destroy
-    @category
-      .redirect_to categories_url, notice: 'Category was successfully destroyed.'
+    authorize Categories::Destroy.new(@category).execute
+    head :ok
   end
 
   private

@@ -1,9 +1,8 @@
 class Categories::Create
-  attr_accessor :params, :post
+  attr_accessor :params
 
   def initialize(params)
     @params = params
-    @post = find_post!
   end
 
   def execute
@@ -11,10 +10,6 @@ class Categories::Create
   end
 
   private
-
-  def find_post!
-    Category.find(params[:post_id])
-  end
 
   def mount_params
     {

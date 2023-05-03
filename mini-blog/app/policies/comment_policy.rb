@@ -12,7 +12,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && (user&.admin || user_is_owner_of_record?)
+    user.present?
   end
 
   def update?

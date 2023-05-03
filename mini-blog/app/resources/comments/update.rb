@@ -1,25 +1,21 @@
 class Comments::Update
-  attr_accessor :params, :post
+  attr_accessor :params, :comment
 
-  def initialize(params)
+  def initialize(params, comment)
     @params = params
-    @post = find_post!
+    @comment = comment
   end
 
   def execute
-    Comment.update!(mount_params)
+    comment.update!(mount_params)
   end
 
   private
 
-  def find_post!
-    Post.find(params[:post_id])
-  end
-
   def mount_params
     {
       comment: params[:comment],
-      post: post
+      post_id: comment.post_id
     }
   end
 end
