@@ -1,20 +1,16 @@
 class Categories::Update
-  attr_accessor :params, :post
+  attr_accessor :params, :category
 
-  def initialize(params)
+  def initialize(params, category)
     @params = params
-    @post = find_post!
+    @category = category
   end
 
   def execute
-    Category.update!(mount_params)
+    category.update!(mount_params)
   end
 
   private
-
-  def find_post!
-    Category.find(params[:category_id])
-  end
 
   def mount_params
     {
