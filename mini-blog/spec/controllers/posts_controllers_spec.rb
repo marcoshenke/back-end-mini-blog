@@ -12,7 +12,7 @@ RSpec.describe PostsController, :focus, type: :controller do
   end
 
   let(:root_keys) { %w[post] }
-  let(:expected_post_keys) { %w[id title description category_id] }
+  let(:expected_post_keys) { %w[id title description category_id user_id] }
   let(:expected_meta_keys) { %w[current_page per_page total_pages total_count] }
   let(:error_root_keys) { %w[error] }
   let(:expected_error_keys) { %w[message] }
