@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller do
+RSpec.describe PostsController, :focus, type: :controller do
   attr_accessor :post_one, :post_two, :post_three
 
   before(:all) do
@@ -12,7 +12,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   let(:root_keys) { %w[post] }
-  let(:expected_post_keys) { %w[id title description] }
+  let(:expected_post_keys) { %w[id title description category_id] }
   let(:expected_meta_keys) { %w[current_page per_page total_pages total_count] }
   let(:error_root_keys) { %w[error] }
   let(:expected_error_keys) { %w[message] }

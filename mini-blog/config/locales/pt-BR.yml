@@ -95,44 +95,41 @@ pt-BR:
       not_a_number: "Não é um número"
       record_invalid: "Registro inválido"
       invalid_foreign_key: "Registro não pode ser excluído por conter registros dependentes"
-      errors:
-    messages:
-      not_found: "não encontrado(a)"
       already_confirmed: "já foi confirmado"
       not_locked: "não foi bloqueado"
 
   devise:
     failure:
-      unauthenticated: 'Para continuar, faça login ou registre-se.'
-      unconfirmed: 'Antes de continuar, confirme a sua conta.'
-      locked: 'A sua conta está bloqueada.'
-      invalid: 'Email ou senha inválidos.'
-      invalid_token: 'O token de autenticação não é válido.'
-      timeout: 'A sua sessão expirou, por favor faça login novamente para poder continuar.'
-      inactive: 'A sua conta ainda não foi ativada.'
+      unauthenticated: "Para continuar, faça login ou registre-se."
+      unconfirmed: "Antes de continuar, confirme a sua conta."
+      locked: "A sua conta está bloqueada."
+      invalid: "Email ou senha inválidos."
+      invalid_token: "O token de autenticação não é válido."
+      timeout: "A sua sessão expirou, por favor faça login novamente para poder continuar."
+      inactive: "A sua conta ainda não foi ativada."
     sessions:
-      signed_in: 'Fez login com sucesso.'
-      signed_out: 'Fez logout com sucesso.'
+      signed_in: "Fez login com sucesso."
+      signed_out: "Fez logout com sucesso."
     passwords:
-      send_instructions: 'Dentro de minutos, receberá um email com as instruções de reinicialização da senha.'
-      updated: 'A sua senha foi alterada com sucesso. Agora está conectado.'
+      send_instructions: "Dentro de minutos, receberá um email com as instruções de reinicialização da senha."
+      updated: "A sua senha foi alterada com sucesso. Agora está conectado."
     confirmations:
-      send_instructions: 'Dentro de minutos, receberá um email com as instruções de confirmação da sua conta.'
-      confirmed: 'A sua conta foi confirmada com sucesso. Agora está conectado.'
+      send_instructions: "Dentro de minutos, receberá um email com as instruções de confirmação da sua conta."
+      confirmed: "A sua conta foi confirmada com sucesso. Agora está conectado."
     registrations:
-      signed_up: 'Fez login com sucesso. Se não autorizado, a confirmação foi enviada por email.'
-      updated: 'A sua conta foi atualizada com sucesso.'
-      destroyed: 'Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.'
+      signed_up: "Fez login com sucesso. Se não autorizado, a confirmação foi enviada por email."
+      updated: "A sua conta foi atualizada com sucesso."
+      destroyed: "Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve."
     unlocks:
-      send_instructions: 'Dentro de minutos, receberá um email com as instruções como desbloquear a sua conta.'
-      unlocked: 'A sua conta foi desbloqueada com sucesso. Agora está conectado.'
+      send_instructions: "Dentro de minutos, receberá um email com as instruções como desbloquear a sua conta."
+      unlocked: "A sua conta foi desbloqueada com sucesso. Agora está conectado."
     mailer:
       confirmation_instructions:
-        subject: 'Instruções de confirmação'
+        subject: "Instruções de confirmação"
       reset_password_instructions:
-        subject: 'Instruções de reinicialização de senha'
+        subject: "Instruções de reinicialização de senha"
       unlock_instructions:
-        subject: 'Instruções de desbloqueio'
+        subject: "Instruções de desbloqueio"
 
   pundit:
     default: "Você não pode acessar essa ação."

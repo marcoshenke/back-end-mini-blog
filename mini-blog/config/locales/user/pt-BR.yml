@@ -1,9 +1,9 @@
 pt-BR:
   activerecord:
-    models:
+    attributes:
       user:
-        attributes:
-          id: "Identificador de usuário"
-          name: "Nome"
-          username: "Nome de usuário"
-          admin: "É administrador?"
+        id: "Identificador de usuário"
+        name: "Nome"
+        username: "Nome de usuário"
+        admin: "É administrador?"
+        password: "Senha"

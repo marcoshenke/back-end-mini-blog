@@ -14,6 +14,7 @@ RSpec.describe UsersController, type: :controller do
     before do
       get :index
       @body = JSON.parse(response.body)
+      @user = create(:user)
     end
 
     it 'return status code :ok' do
@@ -21,8 +22,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'return body json with all users' do
-      user = create(:user)
-      get users_path(user)
+      get users_path(@user)
       expect(JSON.parse(response.body)).to eq(users)
     end
   end
