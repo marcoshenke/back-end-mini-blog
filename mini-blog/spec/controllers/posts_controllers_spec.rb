@@ -1,11 +1,13 @@
 require 'rails_helper'
+require './spec/helpers/authorization_helper'
 
 RSpec.describe PostsController, :focus, type: :controller do
-  attr_accessor :post_one, :post_two, :post_three
+  include AuthorizationHelper
+  attr_accessor :post_one, :post_two, :post_three, :user_login
 
   before(:all) do
     posts = FactoryBot.create_list(:post, 3, :with_comments)
-
+    @user_login = FactoryBot.create(:user)
     @post_one = posts.first
     @post_two = posts.second
     @post_three = posts.third
@@ -20,7 +22,8 @@ RSpec.describe PostsController, :focus, type: :controller do
     {
       post: {
         title: Faker::Quote.yoda,
-        description: Faker::Lorem.characters(number: 15)
+        description: Faker::Lorem.characters(number: 15),
+        category_id: Faker::Number.number
       }
     }
   end
@@ -76,8 +79,8 @@ RSpec.describe PostsController, :focus, type: :controller do
     end
 
     context 'when post exists' do
-      let(:expected_post_keys) { %w[id title description comments] }
-      let(:expected_comment_keys) { %w[id comment created_at] }
+      let(:expected_post_keys) { %w[id title description category_id user_id comments] }
+      let(:expected_comment_keys) { %w[id comment post_id created_at] }
 
       before do
         get :show, params: { id: post_one.id }
@@ -106,6 +109,9 @@ RSpec.describe PostsController, :focus, type: :controller do
 
   describe 'POST #create' do
     before do
+      user_one = { email: 'userone@test.com', password: 'password123' }
+      sign_up(user_one)
+      auth_tokens_for_user(user_one)
       get :create, params: params
       @body = JSON.parse(response.body)
     end
