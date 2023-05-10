@@ -69,4 +69,6 @@ RSpec.configure do |config|
   end
 
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

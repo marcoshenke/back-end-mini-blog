@@ -93,3 +93,5 @@ group :test do
 end
 
 gem "pundit", "~> 2.3"
+
+gem "database_cleaner-active_record", "~> 2.1", :group => :test

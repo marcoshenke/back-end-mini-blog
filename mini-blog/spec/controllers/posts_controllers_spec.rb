@@ -1,8 +1,6 @@
 require 'rails_helper'
-require './spec/helpers/authorization_helper'
 
 RSpec.describe PostsController, :focus, type: :controller do
-  include AuthorizationHelper
   attr_accessor :post_one, :post_two, :post_three, :user_login
 
   before(:all) do
@@ -109,9 +107,8 @@ RSpec.describe PostsController, :focus, type: :controller do
 
   describe 'POST #create' do
     before do
-      user_one = { email: 'userone@test.com', password: 'password123' }
-      sign_up(user_one)
-      auth_tokens_for_user(user_one)
+      @user_random = { email: 'userone@test.com', password: 'password123' }
+      login(@user_random)
       get :create, params: params
       @body = JSON.parse(response.body)
     end
