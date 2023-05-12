@@ -21,7 +21,7 @@ RSpec.describe PostsController, :focus, type: :controller do
       post: {
         title: Faker::Quote.yoda,
         description: Faker::Lorem.characters(number: 15),
-        category_id: Faker::Number.number
+        category: FactoryBot.create(:category)
       }
     }
   end
@@ -107,9 +107,10 @@ RSpec.describe PostsController, :focus, type: :controller do
 
   describe 'POST #create' do
     before do
-      @user_random = { email: 'userone@test.com', password: 'password123' }
-      login(@user_random)
-      get :create, params: params
+      allow(controller).to receive(:authenticate_user!).and_return(true)
+      allow(controller).to receive(:verify_authorized).and_return(true)
+      allow(controller).to receive(:current_user).and_return(@user_login)
+      post :create, params: params
       @body = JSON.parse(response.body)
     end
 
