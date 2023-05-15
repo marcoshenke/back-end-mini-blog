@@ -1,7 +1,9 @@
 require 'rails_helper'
+require './spec/helpers/authentication_helper'
 
 RSpec.describe PostsController, :focus, type: :controller do
-  attr_accessor :post_one, :post_two, :post_three, :user_login
+  include AuthenticationHelper
+  attr_accessor :post_one, :post_two, :post_three, :user_login, :auth_tokens
 
   before(:all) do
     posts = FactoryBot.create_list(:post, 3, :with_comments)
@@ -107,9 +109,8 @@ RSpec.describe PostsController, :focus, type: :controller do
 
   describe 'POST #create' do
     before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-      allow(controller).to receive(:verify_authorized).and_return(true)
-      allow(controller).to receive(:current_user).and_return(@user_login)
+      login(user_login)
+      get_auth_params_from_login_response_headers(response)
       post :create, params: params
       @body = JSON.parse(response.body)
     end
