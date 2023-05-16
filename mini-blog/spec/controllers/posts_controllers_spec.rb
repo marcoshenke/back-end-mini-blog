@@ -3,7 +3,7 @@ require './spec/helpers/authentication_helper'
 
 RSpec.describe PostsController, :focus, type: :controller do
   include AuthenticationHelper
-  attr_accessor :post_one, :post_two, :post_three, :user_login, :auth_tokens
+  attr_accessor :post_one, :post_two, :post_three, :user_login
 
   before(:all) do
     posts = FactoryBot.create_list(:post, 3, :with_comments)
@@ -12,7 +12,9 @@ RSpec.describe PostsController, :focus, type: :controller do
     @post_two = posts.second
     @post_three = posts.third
   end
-
+  let(:valid_headers) do
+    user_login.create_new_auth_token
+  end
   let(:root_keys) { %w[post] }
   let(:expected_post_keys) { %w[id title description category_id user_id] }
   let(:expected_meta_keys) { %w[current_page per_page total_pages total_count] }
@@ -109,10 +111,9 @@ RSpec.describe PostsController, :focus, type: :controller do
 
   describe 'POST #create' do
     before do
-      login(user_login)
-      get_auth_params_from_login_response_headers(response)
-      post :create, params: params
-      @body = JSON.parse(response.body)
+      post posts_url, params: params, as: :json
+      request.headers['access-token', 'token-type', 'client', 'expiry', 'uid', 'Authorization' ] = valid_headers,
+                                                                                                   @body = JSON.parse(response.body)
     end
 
     it 'return status code :created' do
