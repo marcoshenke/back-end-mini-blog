@@ -133,6 +133,7 @@ RSpec.describe PostsController, :focus, type: :controller do
   describe 'PUT #update' do
     context 'when post does not exists' do
       before do
+        set_authentication_headers_for(user)
         put :update, params: params.merge({ id: Faker::Number.number })
         @body = JSON.parse(response.body)
       end
@@ -152,6 +153,7 @@ RSpec.describe PostsController, :focus, type: :controller do
 
     context 'when post exists' do
       before do
+        set_authentication_headers_for(user)
         put :update, params: params.merge({ id: post_one.id })
         @body = JSON.parse(response.body)
       end
@@ -173,6 +175,7 @@ RSpec.describe PostsController, :focus, type: :controller do
   describe 'DESTROY #destroy' do
     context 'when post does not exists' do
       before do
+        set_authentication_headers_for(user)
         delete :destroy, params: params.merge({ id: Faker::Number.number })
         @body = JSON.parse(response.body)
       end
@@ -192,6 +195,7 @@ RSpec.describe PostsController, :focus, type: :controller do
 
     context 'when post exists' do
       before do
+        set_authentication_headers_for(user)
         delete :destroy, params: { id: post_one.id }
       end
 
