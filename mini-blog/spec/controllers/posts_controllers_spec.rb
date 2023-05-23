@@ -3,6 +3,7 @@ require './spec/helpers/authentication_helper'
 
 RSpec.describe PostsController, :focus, type: :controller do
   include AuthenticationHelper
+  include Devise::Test::ControllerHelpers
   attr_accessor :post_one, :post_two, :post_three, :user
 
   before(:all) do
@@ -25,7 +26,7 @@ RSpec.describe PostsController, :focus, type: :controller do
       post: {
         title: Faker::Quote.yoda,
         description: Faker::Lorem.characters(number: 15),
-        category: FactoryBot.create(:category)
+        category_id: FactoryBot.create(:category).id
       }
     }
   end
@@ -110,11 +111,10 @@ RSpec.describe PostsController, :focus, type: :controller do
   end
 
   describe 'POST #create' do
-    before do
-      post posts_url, params: params
-      request.headers.merge!(user.create_new_auth_token)
-      request.headers['access-token', 'token-type', 'client', 'expiry', 'uid', 'Authorization' ] = valid_headers,
-                                                                                                   @body = JSON.parse(response.body)
+    before do # criar um contexto onde o usuario tenta criar um post sem fazer o login
+      set_authentication_headers_for(user)
+      post :create, params: params
+      @body = JSON.parse(response.body)
     end
 
     it 'return status code :created' do
