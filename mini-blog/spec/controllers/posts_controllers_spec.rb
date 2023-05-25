@@ -155,7 +155,8 @@ RSpec.describe PostsController, :focus, type: :controller do
       before do
         set_authentication_headers_for(user)
         put :update, params: params.merge({ id: post_one.id })
-        @body = JSON.parse(response.body)
+
+        @body = JSON.parse([response.body].to_json).first
       end
 
       it 'return status code :ok' do

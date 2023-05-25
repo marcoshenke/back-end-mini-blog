@@ -19,8 +19,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    authorize @post
-    Posts::Update.new(post_params, @post).execute
+    @post = authorize Posts::Update.new(post_params, @post).execute
     render json: @post, serializer: PostSerializer, status: :ok
   end
 
