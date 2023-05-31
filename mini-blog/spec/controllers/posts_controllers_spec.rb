@@ -7,8 +7,8 @@ RSpec.describe PostsController, :focus, type: :controller do
   attr_accessor :post_one, :post_two, :post_three, :user
 
   before(:all) do
-    posts = FactoryBot.create_list(:post, 3, :with_comments)
     @user = FactoryBot.create(:user)
+    posts = FactoryBot.create_list(:post, 3, :with_comments, user_id: user.id)
     @post_one = posts.first
     @post_two = posts.second
     @post_three = posts.third
