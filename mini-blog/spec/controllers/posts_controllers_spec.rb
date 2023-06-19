@@ -1,7 +1,7 @@
 require 'rails_helper'
 require './spec/helpers/authentication_helper'
 
-RSpec.describe PostsController, :focus, type: :controller do
+RSpec.describe PostsController, type: :controller do
   include AuthenticationHelper
   include Devise::Test::ControllerHelpers
   attr_accessor :post_one, :post_two, :post_three, :user
