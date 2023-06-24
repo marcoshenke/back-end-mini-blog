@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  attr_accessor :comment, :comment_two, :user_id, :post_id, :response, :just_comment_text
+
   context 'associations' do
     it { should belong_to(:post) }
     it { should belong_to(:user) }
@@ -15,21 +17,21 @@ RSpec.describe Comment, type: :model do
   describe 'CommentQuery' do
     before(:all) do
       @comment = FactoryBot.create(:comment)
-      @user = @comment.user
-      @post = @comment.post
+      @just_comment_text = @comment.comment
+      @user_id = comment.user.id
+      @post_id = comment.post.id
     end
 
     context 'search by comment_cont' do
       before do
-        @response = described_class.__search(comment_cont: @comment)
-
-        binding.pry
-        @comment_two = response.comment.pluck(:comment).join(', ')
+        @response = described_class.__search(comment_cont: comment)
       end
 
       it 'response match to search params' do
-        @response.map do |_comment|
-          expect(comment_two).to include(@comment)
+        response.map do |comment|
+          expect(comment.comment).to include(just_comment_text)
+          expect(comment.post_id).to eq(post_id)
+          expect(comment.user_id).to eq(user_id)
         end
       end
     end

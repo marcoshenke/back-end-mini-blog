@@ -38,6 +38,7 @@ RSpec.describe Post, type: :model do
 
       it 'response match to search params' do
         @response.map do |post|
+          binding.pry
           expect(post.title.downcase).to include(@post_one.title.downcase)
         end
       end
