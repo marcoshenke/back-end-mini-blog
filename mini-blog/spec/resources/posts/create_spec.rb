@@ -1,10 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Posts::Create do
+  attr_accessor :user, :category
+
+  before(:all) do
+    @user = FactoryBot.create(:user)
+    @category = FactoryBot.create(:category)
+  end
   let(:valid_params) do
     {
       title: Faker::Quote.yoda,
-      description: Faker::Lorem.characters(number: 15)
+      description: Faker::Lorem.characters(number: 15),
+      category_id: category.id,
+      user_id: user.id
     }
   end
   let(:invalid_params) do
@@ -15,18 +23,19 @@ RSpec.describe Posts::Create do
 
   describe '#initialize' do
     before do
-      @instance = described_class.new(valid_params)
+      @instance = described_class.new(valid_params, user)
     end
 
     it 'returns instancied variables' do
       expect(@instance.params).to eq(valid_params)
+      expect(@instance.user).to eq(user)
     end
   end
 
   describe '#execute' do
     context 'when no errors happens' do
       before do
-        @instance = described_class.new(valid_params)
+        @instance = described_class.new(valid_params, user)
 
         allow(@instance).to receive(:mount_params).and_return(valid_params)
       end
@@ -46,7 +55,7 @@ RSpec.describe Posts::Create do
 
     context 'when at least one param is invalid' do
       before do
-        @instance = described_class.new(invalid_params)
+        @instance = described_class.new(invalid_params, user)
       end
 
       it 'raises ActiveRecord::RecordInvalid' do
@@ -57,7 +66,7 @@ RSpec.describe Posts::Create do
 
   context '#mount_params' do
     before do
-      instance = described_class.new(valid_params)
+      instance = described_class.new(valid_params, user)
       @response = instance.send(:mount_params)
     end
 

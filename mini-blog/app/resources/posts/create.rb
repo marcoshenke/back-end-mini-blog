@@ -17,7 +17,7 @@ class Posts::Create
       title: params[:title],
       description: params[:description],
       category_id: params[:category_id],
-      user: user
+      user_id: user.id
     }
   end
 end
