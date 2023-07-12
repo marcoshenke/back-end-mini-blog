@@ -21,10 +21,11 @@ RSpec.describe Posts::Destroy do
     context 'when no errors happens' do
       before do
         @instance = described_class.new(post)
+        @instance.execute
       end
 
-      after do
-        @instance.execute
+      it 'should destroy the post' do
+        expect(Post.where(id: post.id).count).to eq(0)
       end
     end
   end
