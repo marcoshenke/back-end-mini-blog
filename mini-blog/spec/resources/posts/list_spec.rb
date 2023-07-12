@@ -1,0 +1,2 @@
+class Posts::List
+end
