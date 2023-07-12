@@ -35,4 +35,15 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#set_uid' do
+    before do
+      @user = FactoryBot.create(:user)
+      @user.update(uid: nil)
+      @user.send(:set_uid)
+    end
+    it 'set a uid as email if uid is blank' do
+      expect(@user.uid).to eq(@user.email)
+    end
+  end
 end
